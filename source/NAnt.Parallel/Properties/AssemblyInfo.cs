@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="NAnt.CrossCompile team">
 //
-// NAnt.Make, an extension for NAnt which performs file processing similar to make.
+// NAnt.Parallel, an extension for NAnt for parallel task execution.
 // Copyright (C) 2016 NAnt.CrossCompile team.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,7 @@
 // </copyright>
 // <history>
 //   <historyitem date="2016-03-11" change="Created file"/>
+//   <historyitem date="2016-03-12" change="Fixed file header"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 
