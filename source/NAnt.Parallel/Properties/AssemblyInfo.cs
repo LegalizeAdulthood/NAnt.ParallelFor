@@ -65,4 +65,4 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: InternalsVisibleTo("NAnt.Make.Tests")]
+[assembly: InternalsVisibleTo("NAnt.Parallel.Tests")]
