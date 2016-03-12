@@ -1,0 +1,7 @@
+/build/Debug
+/source/NAnt.Parallel/obj
+/build/Release/NAnt.Core.dll
+/build/Release/NAnt.Core.xml
+/build/Release/NAnt.Parallel.pdb
+/build/Release/log4net.dll
+/source/NAnt.Parallel/.vs/NAnt.Parallel/v14/*.suo
