@@ -20,6 +20,7 @@
 // <history>
 //   <historyitem date="2016-03-11" change="Created file based on FileSetCollection.cs of NAnt.Crosscompile 0.7.4.1"/>
 //   <historyitem date="2016-03-12" change="Fixed file header"/>
+//   <historyitem date="2016-03-13" change="Fixed method headers"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 namespace NAnt.Parallel.Types
@@ -52,7 +53,7 @@ namespace NAnt.Parallel.Types
     /// Gets all files using relative paths.
     /// </summary>
     /// <param name="baseUri">The project base URI.</param>
-    /// <returns>A list containing all files of the instance relative to the <see cref="baseUri"/> parameter.</returns>
+    /// <returns>A list containing all files of the instance relative to the <paramref name="baseUri"/> parameter.</returns>
     internal IEnumerable<string> GetAllFilesUsingRelativePaths(Uri baseUri)
     {
       List<string> allFiles = new List<string>();
@@ -75,7 +76,7 @@ namespace NAnt.Parallel.Types
     /// Gets all directories using relative paths.
     /// </summary>
     /// <param name="baseUri">The project base URI.</param>
-    /// <returns>A list containing all directories of the instance relative to the <see cref="baseUri"/> parameter.</returns>
+    /// <returns>A list containing all directories of the instance relative to the <paramref name="baseUri"/> parameter.</returns>
     internal IEnumerable<string> GetAllDirectoriesUsingRelativePaths(Uri baseUri)
     {
       List<string> allFiles = new List<string>();

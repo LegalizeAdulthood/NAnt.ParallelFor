@@ -19,8 +19,9 @@
 // </copyright>
 // <history>
 //   <historyitem date="2016-03-11" change="Created file based on BaseProcessorTask.cs of NAnt.Crosscompile 0.7.4.1 
-//   <historyitem date="2016-03-12" change="Fixed file header"/>
 // and TaskContainer.cs of NAnt 0.9.2"/>
+//   <historyitem date="2016-03-12" change="Fixed file header"/>
+//   <historyitem date="2016-03-13" change="Fixed file header, added local property handling, fixed logging exception"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 namespace NAnt.Parallel.Tasks
@@ -39,8 +40,13 @@ namespace NAnt.Parallel.Tasks
   /// Task container which executes the tasks in parallel.
   /// </summary>
   /// <seealso cref="TaskContainer" />
-  public class ParallelTaskContainer : TaskContainer
+  public class ParallelTaskContainer : TaskContainer, ILocalPropertyProvider
   {
+    /// <summary>
+    /// The local properties
+    /// </summary>
+    private readonly Dictionary<Thread, Dictionary<string, string>> localProperties = new Dictionary<Thread, Dictionary<string, string>>();
+
     /// <summary>
     /// The initial list of items to process.
     /// </summary>
@@ -104,10 +110,21 @@ namespace NAnt.Parallel.Tasks
     }
 
     /// <summary>
+    /// Adds the property.
+    /// </summary>
+    /// <param name="propertyName">Name of the property.</param>
+    /// <param name="propertyValue">The property value.</param>
+    public void AddProperty(string propertyName, string propertyValue)
+    {
+      this.localProperties[Thread.CurrentThread].Add(propertyName, propertyValue);
+    }
+
+    /// <summary>
     /// Executes the task.
     /// </summary>    
     protected override void ExecuteTask()
     {
+      Logger.SetCurrentTask(this);
       this.parent = this.Parent as ParallelTask;
 
       if (this.parent == null)
@@ -124,13 +141,21 @@ namespace NAnt.Parallel.Tasks
         // Lock not required as build threads are not running at this moment
         this.itemsToProcessQueue.Enqueue(sourcePath);
       }
-
+      
       Logger.SetBuildThreadsActive(true);
       List<Thread> buildThreads = new List<Thread>();
+
+      // Reduce number of threads if there are less items to process
+      if (this.MaxThreads > this.itemsToProcessList.Count)
+      {
+        this.MaxThreads = this.itemsToProcessList.Count;
+      }
+
       for (int threadIndex = 0; threadIndex < this.MaxThreads; threadIndex++)
       {
         Thread t = new Thread(this.ExecutChildTasks);
         buildThreads.Add(t);
+        this.localProperties.Add(t, new Dictionary<string, string>());
         t.Start();
       }
 
@@ -188,6 +213,7 @@ namespace NAnt.Parallel.Tasks
           }
         }
 
+        this.localProperties[Thread.CurrentThread].Clear();
         foreach (XmlNode childNode in this.XmlNode)
         {
           // we only care about xmlnodes (elements) that are of the right namespace.
@@ -275,6 +301,12 @@ namespace NAnt.Parallel.Tasks
         foreach (XmlAttribute attribute in attributes)
         {
           attribute.Value = attribute.Value.Replace(oldValue, newValue);
+          Dictionary<string, string> threadLocalProperties = this.localProperties[Thread.CurrentThread];
+          foreach (string propertyName in threadLocalProperties.Keys)
+          {
+            string oldValue2 = "@{" + propertyName + "}";
+            attribute.Value = attribute.Value.Replace(oldValue2, threadLocalProperties[propertyName]);
+          }
         }
       }
     }

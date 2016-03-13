@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Tasks\ILocalPropertyProvider.cs" />
+    <Compile Include="Tasks\LocalPropertyTask.cs" />
     <Compile Include="Tasks\ParallelTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\ParallelTaskContainer.cs" />

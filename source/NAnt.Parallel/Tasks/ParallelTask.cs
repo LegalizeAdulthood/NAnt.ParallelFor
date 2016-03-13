@@ -20,6 +20,7 @@
 // <history>
 //   <historyitem date="2016-03-11" change="Created file based on BaseProcessorTask.cs of NAnt.Crosscompile 0.7.4.1"/>
 //   <historyitem date="2016-03-12" change="Fixed file header"/>
+//   <historyitem date="2016-03-13" change="Added additional processing options and parameter checks"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 namespace NAnt.Parallel.Tasks
@@ -54,7 +55,7 @@ namespace NAnt.Parallel.Tasks
     /// <see cref="InputFilesCollection"/> elements.
     /// </summary>
     [BuildElement("in")]
-    public FileSetCollection InputFilesCollection { get; private set; } = new FileSetCollection();
+    public FileSetCollection InputFilesCollection { get; } = new FileSetCollection();
 
     /// <summary>
     /// Gets or sets the type of iteration that should be done.
@@ -75,6 +76,7 @@ namespace NAnt.Parallel.Tasks
     /// Gets or sets the source of the iteration.
     /// </summary>
     [TaskAttribute("in", Required = false)]
+    [StringValidator(AllowEmpty = false)]
     public string Source { get; set; }
 
     /// <summary>
@@ -84,6 +86,15 @@ namespace NAnt.Parallel.Tasks
     public string Delimiter { get; set; }
 
     /// <summary>
+    /// Gets or sets the string split options.
+    /// </summary>
+    /// <value>
+    /// The string split options.
+    /// </value>
+    [TaskAttribute("splitoption")]
+    public StringSplitOptions StringSplitOptions { get; set; } = StringSplitOptions.None;
+
+    /// <summary>
     /// Executes the task.
     /// </summary>
     protected override void ExecuteTask()
@@ -91,24 +102,131 @@ namespace NAnt.Parallel.Tasks
       switch (this.ItemType)
       {
         case LoopTask.LoopItem.File:
-          this.TaskContainer.AddItems(
-            this.InputFilesCollection.GetAllFilesUsingRelativePaths(
-              new Uri(Path.Combine(this.Project.BaseDirectory, "."))));
+          this.ExecuteTaskWithFiles();
           break;
         case LoopTask.LoopItem.Folder:
-          this.TaskContainer.AddItems(
-            this.InputFilesCollection.GetAllDirectoriesUsingRelativePaths(
-              new Uri(Path.Combine(this.Project.BaseDirectory, "."))));
+          this.ExecuteTaskWithDirectories();
           break;
         case LoopTask.LoopItem.Line:
-          this.TaskContainer.AddItems(File.ReadAllLines(this.Source));
+          this.ExecuteTaskWithLines();
           break;
         case LoopTask.LoopItem.String:
-          this.TaskContainer.AddItems(this.Source.Split(new[] { this.Delimiter }, StringSplitOptions.None));
+          this.ExecuteTaskWithStrings();
           break;
       }
 
       this.TaskContainer.Execute();
+    }
+
+    /// <summary>
+    /// Executes the task with strings.
+    /// </summary>
+    /// <exception cref="BuildException">
+    /// @The in attribute must be set for looping over strings
+    /// or
+    /// @The delimiter attribute must be set for looping over strings
+    /// </exception>
+    private void ExecuteTaskWithStrings()
+    {
+      if (this.Source == null)
+      {
+        throw new BuildException(@"The ""in"" attribute must be set for looping over strings", this.Location);
+      }
+
+      if (this.Delimiter == null)
+      {
+        throw new BuildException(@"The ""delim"" attribute must be set for looping over strings", this.Location);
+      }
+
+      this.TaskContainer.AddItems(this.Source.Split(new[] { this.Delimiter }, this.StringSplitOptions));
+    }
+
+    /// <summary>
+    /// Executes the task with lines.
+    /// </summary>
+    /// <exception cref="BuildException">
+    /// @The in attribute must be set for looping over lines
+    /// or
+    /// @The file specified by the in attribute doesn't exist
+    /// </exception>
+    private void ExecuteTaskWithLines()
+    {
+      if (this.Source == null)
+      {
+        throw new BuildException(@"The ""in"" attribute must be set for looping over lines", this.Location);
+      }
+      else if (File.Exists(this.Source) == false)
+      {
+        throw new BuildException(@"The file specified by the ""in"" attribute doesn't exist", this.Location);
+      }
+
+      this.TaskContainer.AddItems(File.ReadAllLines(this.Source));
+    }
+
+    /// <summary>
+    /// Executes the task with files.
+    /// </summary>
+    /// <exception cref="BuildException">
+    /// @Either the in attribute or the &lt;in&gt; element must be set for looping over files
+    /// or
+    /// @The directory specified by the in attribute doesn't exist
+    /// </exception>
+    private void ExecuteTaskWithFiles()
+    {
+      if (((this.Source == null) && this.InputFilesCollection.Items.Count == 0) ||
+          ((this.Source != null) && this.InputFilesCollection.Items.Count != 0))
+      {
+        // Either no ipnut specified of duplicate input specified
+        throw new BuildException(@"Either the ""in"" attribute or the <in> element must be set for looping over files", this.Location);
+      }
+      else if (this.Source != null)
+      {
+        if (Directory.Exists(this.Source) == false)
+        {
+          throw new BuildException(@"The directory specified by the ""in"" attribute doesn't exist", this.Location);
+        }
+
+        this.TaskContainer.AddItems(Directory.GetFiles(this.Source));
+      }
+      else
+      {
+        this.TaskContainer.AddItems(
+          this.InputFilesCollection.GetAllFilesUsingRelativePaths(
+            new Uri(Path.Combine(this.Project.BaseDirectory, "."))));
+      }
+    }
+
+    /// <summary>
+    /// Executes the task with directories.
+    /// </summary>
+    /// <exception cref="BuildException">
+    /// @Either the in attribute or the &lt;in&gt; element must be set for looping over files
+    /// or
+    /// @The directory specified by the in attribute doesn't exist
+    /// </exception>
+    private void ExecuteTaskWithDirectories()
+    {
+      if (((this.Source == null) && this.InputFilesCollection.Items.Count == 0) ||
+          ((this.Source != null) && this.InputFilesCollection.Items.Count != 0))
+      {
+        // Either no ipnut specified of duplicate input specified
+        throw new BuildException(@"Either the ""in"" attribute or the <in> element must be set for looping over directories", this.Location);
+      }
+      else if (this.Source != null)
+      {
+        if (Directory.Exists(this.Source) == false)
+        {
+          throw new BuildException(@"The directory specified by the ""in"" attribute doesn't exist", this.Location);
+        }
+
+        this.TaskContainer.AddItems(Directory.GetDirectories(this.Source));
+      }
+      else
+      {
+        this.TaskContainer.AddItems(
+            this.InputFilesCollection.GetAllDirectoriesUsingRelativePaths(
+              new Uri(Path.Combine(this.Project.BaseDirectory, "."))));
+      }
     }
   }
 }

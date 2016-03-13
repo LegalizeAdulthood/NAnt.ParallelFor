@@ -110,6 +110,45 @@
             </summary>
             <returns>The last occurred exception.</returns>
         </member>
+        <member name="T:NAnt.Parallel.Tasks.ILocalPropertyProvider">
+            <summary>
+            Interface for providing local properties.
+            </summary>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ILocalPropertyProvider.AddProperty(System.String,System.String)">
+            <summary>
+            Adds the property.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="propertyValue">The property value.</param>
+        </member>
+        <member name="T:NAnt.Parallel.Tasks.LocalPropertyTask">
+            <summary>
+            Task which handles local properties.
+            </summary>
+            <seealso cref="T:NAnt.Core.Task" />
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.LocalPropertyTask.PropertyName">
+            <summary>
+            Gets or sets the name of the property.
+            </summary>
+            <value>
+            The name of the property.
+            </value>
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.LocalPropertyTask.PropertyValue">
+            <summary>
+            Gets or sets the property value.
+            </summary>
+            <value>
+            The property value.
+            </value>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.LocalPropertyTask.ExecuteTask">
+            <summary>
+            Executes the task.
+            </summary>
+        </member>
         <member name="T:NAnt.Parallel.Tasks.ParallelTask">
             <summary>
             A NAnt task which allows parallel execution.
@@ -154,16 +193,69 @@
             Gets or sets the delimiter char.
             </summary>
         </member>
+        <member name="P:NAnt.Parallel.Tasks.ParallelTask.StringSplitOptions">
+            <summary>
+            Gets or sets the string split options.
+            </summary>
+            <value>
+            The string split options.
+            </value>
+        </member>
         <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTask">
             <summary>
             Executes the task.
             </summary>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithStrings">
+            <summary>
+            Executes the task with strings.
+            </summary>
+            <exception cref="T:NAnt.Core.BuildException">
+            @The in attribute must be set for looping over strings
+            or
+            @The delimiter attribute must be set for looping over strings
+            </exception>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithLines">
+            <summary>
+            Executes the task with lines.
+            </summary>
+            <exception cref="T:NAnt.Core.BuildException">
+            @The in attribute must be set for looping over lines
+            or
+            @The file specified by the in attribute doesn't exist
+            </exception>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithFiles">
+            <summary>
+            Executes the task with files.
+            </summary>
+            <exception cref="T:NAnt.Core.BuildException">
+            @Either the in attribute or the &lt;in&gt; element must be set for looping over files
+            or
+            @The directory specified by the in attribute doesn't exist
+            </exception>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithDirectories">
+            <summary>
+            Executes the task with directories.
+            </summary>
+            <exception cref="T:NAnt.Core.BuildException">
+            @Either the in attribute or the &lt;in&gt; element must be set for looping over files
+            or
+            @The directory specified by the in attribute doesn't exist
+            </exception>
         </member>
         <member name="T:NAnt.Parallel.Tasks.ParallelTaskContainer">
             <summary>
             Task container which executes the tasks in parallel.
             </summary>
             <seealso cref="T:NAnt.Core.TaskContainer" />
+        </member>
+        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.localProperties">
+            <summary>
+            The local properties
+            </summary>
         </member>
         <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.itemsToProcessList">
             <summary>
@@ -219,6 +311,13 @@
             Adds the items.
             </summary>
             <param name="items">The items.</param>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.AddProperty(System.String,System.String)">
+            <summary>
+            Adds the property.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+            <param name="propertyValue">The property value.</param>
         </member>
         <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ExecuteTask">
             <summary>
@@ -409,14 +508,14 @@
             Gets all files using relative paths.
             </summary>
             <param name="baseUri">The project base URI.</param>
-            <returns>A list containing all files of the instance relative to the <see cref="!:baseUri"/> parameter.</returns>
+            <returns>A list containing all files of the instance relative to the <paramref name="baseUri"/> parameter.</returns>
         </member>
         <member name="M:NAnt.Parallel.Types.FileSetCollection.GetAllDirectoriesUsingRelativePaths(System.Uri)">
             <summary>
             Gets all directories using relative paths.
             </summary>
             <param name="baseUri">The project base URI.</param>
-            <returns>A list containing all directories of the instance relative to the <see cref="!:baseUri"/> parameter.</returns>
+            <returns>A list containing all directories of the instance relative to the <paramref name="baseUri"/> parameter.</returns>
         </member>
     </members>
 </doc>

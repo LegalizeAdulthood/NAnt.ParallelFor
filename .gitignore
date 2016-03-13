@@ -5,3 +5,6 @@
 /build/Release/NAnt.Parallel.pdb
 /build/Release/log4net.dll
 /source/NAnt.Parallel/.vs/NAnt.Parallel/v14/*.suo
+/source/NAnt.Parallel/StyleCop.Cache
+/source/.vs/NAnt.Parallel/v14/*.suo
+/source/NAnt.Parallel/*.user
