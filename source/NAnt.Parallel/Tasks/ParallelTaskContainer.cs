@@ -22,6 +22,7 @@
 // and TaskContainer.cs of NAnt 0.9.2"/>
 //   <historyitem date="2016-03-12" change="Fixed file header"/>
 //   <historyitem date="2016-03-13" change="Fixed file header, added local property handling, fixed logging exception"/>
+//   <historyitem date="2016-03-14" change="Simplified property handling"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 namespace NAnt.Parallel.Tasks
@@ -214,6 +215,8 @@ namespace NAnt.Parallel.Tasks
         }
 
         this.localProperties[Thread.CurrentThread].Clear();
+        this.localProperties[Thread.CurrentThread].Add(this.parent.Property, currentItem);
+
         foreach (XmlNode childNode in this.XmlNode)
         {
           // we only care about xmlnodes (elements) that are of the right namespace.
@@ -226,7 +229,7 @@ namespace NAnt.Parallel.Tasks
           }
 
           XmlNode clone = childNode.CloneNode(true);
-          this.ReplaceAttributeValues(clone, currentItem);
+          this.ReplaceAttributeValues(clone);
 
           if (TypeFactory.TaskBuilders.Contains(clone.Name))
           {
@@ -291,17 +294,14 @@ namespace NAnt.Parallel.Tasks
     /// Replaces the attribute values.
     /// </summary>
     /// <param name="xmlNode">The cloned XML node.</param>
-    /// <param name="newValue">The new value for replacement.</param>
-    private void ReplaceAttributeValues(XmlNode xmlNode, string newValue)
+    private void ReplaceAttributeValues(XmlNode xmlNode)
     {
       XmlNodeList attributes = xmlNode.SelectNodes("//@*");
       if (attributes != null)
       {
-        string oldValue = "@{" + this.parent.Property + "}";
+        Dictionary<string, string> threadLocalProperties = this.localProperties[Thread.CurrentThread];
         foreach (XmlAttribute attribute in attributes)
         {
-          attribute.Value = attribute.Value.Replace(oldValue, newValue);
-          Dictionary<string, string> threadLocalProperties = this.localProperties[Thread.CurrentThread];
           foreach (string propertyName in threadLocalProperties.Keys)
           {
             string oldValue2 = "@{" + propertyName + "}";
