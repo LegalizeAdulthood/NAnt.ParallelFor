@@ -77,3 +77,4 @@ The plugin is still under development. If you find any bugs or request a feature
 		</exec>
 	</do>
 </parallel>
+```
