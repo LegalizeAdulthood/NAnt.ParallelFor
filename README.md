@@ -6,8 +6,8 @@ This plugin allows you to execute a sequence of task for a set of files, directo
 The plugin is still under development. If you find any bugs or request a feature, feel free to create an issue.
 
 ## Remarks
-* Access to the loop property must be performed using @{propertyname} instead of ${propertyname}. The property is only available in the <do> block of the task and will only work in XML attributes.
-* Although  the order of the input can be specified by the orderby attribute, the execution order can vary due to the execution time required for one item.
+* Access to the loop property is only available in the <do> block of the task and will only work in XML attributes.
+* Although the order of the input can be specified by the orderby attribute, the execution order can vary due to the execution time required for one item.
 * If you want to create data types like properties or file sets in the <do> block, ensure that they get an unique name across all threads.
 * If the maxthreads attribute is not set, the plugin will automatically use the number of available processor cores for execution. For debugging or testing the attribute maxthreads can be set to 1 to achieve sequential execution.
 
@@ -22,11 +22,11 @@ The plugin is still under development. If you find any bugs or request a feature
     </items>
   </in>
 	<do maxthreads="8" orderby="Name">      
-		<echo message="File: @{file}"/>
+		<echo message="File: ${file}"/>
 		<exec program="cmd.exe">
 			<arg value="/c"/>
 			<arg value="echo"/>
-			<arg value="@{file}"/>
+			<arg value="${file}"/>
 		</exec>
 	</do>
 </parallel>
@@ -55,11 +55,11 @@ The plugin is still under development. If you find any bugs or request a feature
 ```xml
 <parallel item="String" property="stringItem" delim=";" in="Item1;Item2;Item3;Item4">
 	<do maxthreads="8" orderby="Name">      
-		<echo message="String Item: @{stringItem}"/>
+		<echo message="String Item: ${stringItem}"/>
 		<exec program="cmd.exe">
 			<arg value="/c"/>
 			<arg value="echo"/>
-			<arg value="@{stringItem}"/>
+			<arg value="${stringItem}"/>
 		</exec>
 	</do>
 </parallel>
@@ -69,11 +69,11 @@ The plugin is still under development. If you find any bugs or request a feature
 ```xml
 <parallel item="Line" property="lineContent" in="SampleFile.txt">
 	<do maxthreads="8" orderby="Name">      
-		<echo message="Line: @{lineContent}"/>
+		<echo message="Line: ${lineContent}"/>
 		<exec program="cmd.exe">
 			<arg value="/c"/>
 			<arg value="echo"/>
-			<arg value="@{lineContent}"/>
+			<arg value="${lineContent}"/>
 		</exec>
 	</do>
 </parallel>
