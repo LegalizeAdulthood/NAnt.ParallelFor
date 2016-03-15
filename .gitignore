@@ -8,3 +8,4 @@
 /source/NAnt.Parallel/StyleCop.Cache
 /source/.vs/NAnt.Parallel/v14/*.suo
 /source/NAnt.Parallel/*.user
+/source/*.user

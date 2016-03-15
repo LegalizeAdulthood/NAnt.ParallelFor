@@ -71,7 +71,7 @@
             <param name="format">The format string.</param>
             <param name="arguments">The format string arguments.</param>
         </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(System.String,System.Object[])">
+        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(System.String,System.Boolean,System.Object[])">
             <summary>
             Formats the error message and writes it to the build log.
             If the build threads aren't executed at the moment, a <see cref="T:NAnt.Core.BuildException"/> will be thrown.
@@ -79,7 +79,7 @@
             <param name="format">The format string.</param>
             <param name="arguments">The format string arguments.</param>
         </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(System.Exception,System.String,System.Object[])">
+        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(System.Exception,System.String,System.Boolean,System.Object[])">
             <summary>
             Formats the error message and writes it to the build log.
             If the build threads aren't executed at the moment, a <see cref="T:NAnt.Core.BuildException" /> will be thrown.
@@ -88,7 +88,7 @@
             <param name="format">The format string.</param>
             <param name="arguments">The format string arguments.</param>
         </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(NAnt.Core.Element,System.Exception,System.String,System.Object[])">
+        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(NAnt.Core.Element,System.Exception,System.String,System.Boolean,System.Object[])">
             <summary>
             Formats the error message and writes it to the build log.
             If the build threads aren't executed at the moment, a <see cref="T:NAnt.Core.BuildException" /> will be thrown.
@@ -337,12 +337,28 @@
             Processes the file.
             </summary>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ReplaceAttributeValues(System.Xml.XmlNode,System.String)">
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateBuildElement``1(System.Xml.XmlNode,System.Xml.XmlNode,NAnt.Parallel.Tasks.ParallelTaskContainer.CreateElement{``0})">
+            <summary>
+            Creates the build element.
+            </summary>
+            <typeparam name="TElement">The type of the element.</typeparam>
+            <param name="originalNode">The original node.</param>
+            <param name="clonedNode">The cloned node.</param>
+            <param name="createAction">The create action.</param>
+            <returns>The created element or null if an error occured.</returns>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetAdditionalElementData(NAnt.Core.Element,System.Xml.XmlNode)">
+            <summary>
+            Sets the additional element data.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="childNode">The original child node.</param>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ReplaceAttributeValues(System.Xml.XmlNode)">
             <summary>
             Replaces the attribute values.
             </summary>
             <param name="xmlNode">The cloned XML node.</param>
-            <param name="newValue">The new value for replacement.</param>
         </member>
         <member name="T:NAnt.Parallel.Tasks.Sorting.SortingCriterion">
             <summary>

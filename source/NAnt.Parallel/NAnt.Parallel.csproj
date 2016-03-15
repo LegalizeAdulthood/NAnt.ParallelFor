@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Tasks\ILocalPropertyProvider.cs" />
     <Compile Include="Tasks\LocalPropertyTask.cs" />
     <Compile Include="Tasks\ParallelTask.cs" />
@@ -48,6 +47,7 @@
     <Compile Include="Tasks\ParallelTaskContainer.cs" />
     <Compile Include="Tasks\Sorting\SortingCriterion.cs" />
     <Compile Include="Tasks\Sorting\SortingDirection.cs" />
+    <Compile Include="Tasks\TaskNodeInfo.cs" />
     <Compile Include="Types\BaseDataTypeCollection.cs" />
     <Compile Include="Types\FileSetCollection.cs" />
   </ItemGroup>
