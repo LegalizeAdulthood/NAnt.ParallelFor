@@ -6,7 +6,7 @@ This plugin allows you to execute a sequence of task for a set of files, directo
 The plugin is still under development. If you find any bugs or request a feature, feel free to create an issue.
 
 ## Remarks
-* Access to the loop property is only available in the <do> block of the task and will only work in XML attributes.
+* Access to the loop property is only available in the &lt;do&gt; block of the task and will only work in XML attributes.
 * Although the order of the input can be specified by the orderby attribute, the execution order can vary due to the execution time required for one item.
 * If you want to create data types like properties or file sets in the <do> block, ensure that they get an unique name across all threads.
 * If the maxthreads attribute is not set, the plugin will automatically use the number of available processor cores for execution. For debugging or testing the attribute maxthreads can be set to 1 to achieve sequential execution.
