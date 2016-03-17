@@ -1,0 +1,21 @@
+<project default="all">
+  <target name="all" depends="zip"/>
+  
+  <target name="zip">
+    <delete>
+      <fileset>
+        <include name="NAnt.Parallel-*.zip"/>
+      </fileset>
+    </delete>
+    
+    <zip zipfile="NAnt.Parallel-travis.zip">
+      <fileset basedir="build/Release">
+        <include name="NAnt.Parallel.*"/>
+        <exclude name="*.pdb"/>
+      </fileset>
+      <fileset>
+        <include name="LICENSE"/>
+      </fileset>
+    </zip>
+  </target>
+</project>
