@@ -16,65 +16,65 @@ The plugin is still under development. If you find any bugs or request a feature
 ### Looping over files
 ```xml
 <parallel item="File" property="file">
-	<in>
+  <in>
     <items>
       <include name="**/*.c"/>
     </items>
   </in>
-	<do maxthreads="8" orderby="Name">      
-		<echo message="File: ${file}"/>
-		<exec program="cmd.exe">
-			<arg value="/c"/>
-			<arg value="echo"/>
-			<arg value="${file}"/>
-		</exec>
-	</do>
+  <do maxthreads="8" orderby="Name">      
+    <echo message="File: ${file}"/>
+    <exec program="cmd.exe">
+      <arg value="/c"/>
+      <arg value="echo"/>
+      <arg value="${file}"/>
+    </exec>
+  </do>
 </parallel>
 ```
 
 ### Looping over directories
 ```xml
 <parallel item="Folder" property="directory">
-	<in>
+  <in>
     <items>
       <include name="*"/>
     </items>
   </in>
-	<do maxthreads="8" orderby="Name">      
-		<echo message="Directory: @{directory}"/>
-		<exec program="cmd.exe">
-			<arg value="/c"/>
-			<arg value="echo"/>
-			<arg value="@{directory}"/>
-		</exec>
-	</do>
+  <do maxthreads="8" orderby="Name">      
+    <echo message="Directory: @{directory}"/>
+    <exec program="cmd.exe">
+      <arg value="/c"/>
+      <arg value="echo"/>
+      <arg value="@{directory}"/>
+    </exec>
+  </do>
 </parallel>
 ```
 
 ### Looping over string items
 ```xml
 <parallel item="String" property="stringItem" delim=";" in="Item1;Item2;Item3;Item4">
-	<do maxthreads="8" orderby="Name">      
-		<echo message="String Item: ${stringItem}"/>
-		<exec program="cmd.exe">
-			<arg value="/c"/>
-			<arg value="echo"/>
-			<arg value="${stringItem}"/>
-		</exec>
-	</do>
+  <do maxthreads="8" orderby="Name">      
+    <echo message="String Item: ${stringItem}"/>
+    <exec program="cmd.exe">
+      <arg value="/c"/>
+      <arg value="echo"/>
+      <arg value="${stringItem}"/>
+    </exec>
+  </do>
 </parallel>
 ```
 
 ### Looping over lines of a file
 ```xml
 <parallel item="Line" property="lineContent" in="SampleFile.txt">
-	<do maxthreads="8" orderby="Name">      
-		<echo message="Line: ${lineContent}"/>
-		<exec program="cmd.exe">
-			<arg value="/c"/>
-			<arg value="echo"/>
-			<arg value="${lineContent}"/>
-		</exec>
-	</do>
+  <do maxthreads="8" orderby="Name">      
+    <echo message="Line: ${lineContent}"/>
+    <exec program="cmd.exe">
+      <arg value="/c"/>
+      <arg value="echo"/>
+      <arg value="${lineContent}"/>
+    </exec>
+  </do>
 </parallel>
 ```
