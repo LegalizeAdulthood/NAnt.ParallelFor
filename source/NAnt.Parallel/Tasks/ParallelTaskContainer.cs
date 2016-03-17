@@ -24,6 +24,7 @@
 //   <historyitem date="2016-03-13" change="Fixed file header, added local property handling, fixed logging exception"/>
 //   <historyitem date="2016-03-14" change="Simplified property handling"/>
 //   <historyitem date="2016-03-14" change="Changed property handling and error handling, added stoplooponerror attribute"/>
+//   <historyitem date="2016-03-17" change="Fixed issue #1"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 namespace NAnt.Parallel.Tasks
@@ -453,29 +454,28 @@ namespace NAnt.Parallel.Tasks
         {
           // The previously executed task isn't the parent of the started task, 
           // so it must be the sibling of the last executed task or of the parents task
-          XmlNode taskNode = taskNodeInfo.XmlNode.NextSibling;
-
+          // Start with the last executed XML node
+          XmlNode previousTaskNode = taskNodeInfo.XmlNode;
           XmlNode newTaskNode = null;
 
-          // Start with the last executed XML node
-          XmlNode parentNode = taskNodeInfo.XmlNode;
-          while ((newTaskNode == null) && (parentNode != null))
+          while ((newTaskNode == null) && (previousTaskNode != null))
           {
             // Continue searching while there is a next sibling of the last executed (parent) task which is known as task
+            newTaskNode = previousTaskNode;
             do
             {
-              newTaskNode = parentNode.NextSibling;
+              newTaskNode = newTaskNode.NextSibling;
             }
             while ((newTaskNode != null) && (TypeFactory.TaskBuilders.Contains(newTaskNode.Name) == false));
 
             // No task found in siblings of (parent) node, move to next parent
-            if (taskNode == null)
+            if (newTaskNode == null)
             {
-              parentNode = parentNode.ParentNode;
+              previousTaskNode = previousTaskNode.ParentNode;
             }
           }
 
-          this.SetNewTaskNodeInfo(e.Task, taskNode, taskNodeInfo);
+          this.SetNewTaskNodeInfo(e.Task, newTaskNode, taskNodeInfo);
         }
       }
     }
