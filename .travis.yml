@@ -6,4 +6,4 @@ install:
 
 script:
   - mono --version
-  - mono /usr/local/nant/bin/NAnt.exe
+  - mono /usr/lib/NAnt/NAnt.exe
