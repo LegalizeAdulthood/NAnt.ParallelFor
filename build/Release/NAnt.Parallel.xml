@@ -4,112 +4,6 @@
         <name>NAnt.Parallel</name>
     </assembly>
     <members>
-        <member name="T:NAnt.Parallel.Helpers.Logger">
-            <summary>
-            Logging abstraction for NAnt.CrossCompile.
-            </summary>
-        </member>
-        <member name="F:NAnt.Parallel.Helpers.Logger.LastExceptionLock">
-            <summary>
-            Lock for the last caught exception which is stored in <see cref="F:NAnt.Parallel.Helpers.Logger.lastException"/>.
-            </summary>
-        </member>
-        <member name="F:NAnt.Parallel.Helpers.Logger.currentTask">
-            <summary>
-            The currently executed task.
-            </summary>
-        </member>
-        <member name="F:NAnt.Parallel.Helpers.Logger.lastException">
-            <summary>
-            The last caught exception.
-            </summary>
-        </member>
-        <member name="F:NAnt.Parallel.Helpers.Logger.buildThreadsActive">
-            <summary>
-            Indicates if build threads are currently active.
-            </summary>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.SetCurrentTask(NAnt.Core.Task)">
-            <summary>
-            Sets the currently executed task.
-            </summary>
-            <param name="value">The currently executed task.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.SetBuildThreadsActive(System.Boolean)">
-            <summary>
-            Sets a value indicating if build threads are currently active.
-            </summary>
-            <param name="value">A value indicating if build threads are currently active.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogDebug(System.String,System.Object[])">
-            <summary>
-            Formats the debug message and writes it to the build log.
-            </summary>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogDebug(NAnt.Core.Element,System.String,System.Object[])">
-            <summary>
-            Formats the debug message and writes it to the build log.
-            </summary>
-            <param name="currentInstance">The current Task instance which is performing the log.</param>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogInfo(System.String,System.Object[])">
-            <summary>
-            Formats the info message and writes it to the build log.
-            </summary>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogInfo(NAnt.Core.Element,System.String,System.Object[])">
-            <summary>
-            Formats the info message and writes it to the build log.
-            </summary>
-            <param name="currentInstance">The current Task instance which is performing the log.</param>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(System.String,System.Boolean,System.Object[])">
-            <summary>
-            Formats the error message and writes it to the build log.
-            If the build threads aren't executed at the moment, a <see cref="T:NAnt.Core.BuildException"/> will be thrown.
-            </summary>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(System.Exception,System.String,System.Boolean,System.Object[])">
-            <summary>
-            Formats the error message and writes it to the build log.
-            If the build threads aren't executed at the moment, a <see cref="T:NAnt.Core.BuildException" /> will be thrown.
-            </summary>
-            <param name="innerException">The inner exception.</param>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.LogError(NAnt.Core.Element,System.Exception,System.String,System.Boolean,System.Object[])">
-            <summary>
-            Formats the error message and writes it to the build log.
-            If the build threads aren't executed at the moment, a <see cref="T:NAnt.Core.BuildException" /> will be thrown.
-            </summary>
-            <param name="currentInstance">The current Task instance which is performing the log.</param>
-            <param name="innerException">The inner exception.</param>
-            <param name="format">The format string.</param>
-            <param name="arguments">The format string arguments.</param>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.HasErrorOccurred">
-            <summary>
-            Returns a value indicating if an error has occurred during the execution.
-            </summary>
-            <returns>A value indicating if an error has occurred during the execution.</returns>
-        </member>
-        <member name="M:NAnt.Parallel.Helpers.Logger.GetLastException">
-            <summary>
-            Returns the last occurred exception.
-            </summary>
-            <returns>The last occurred exception.</returns>
-        </member>
         <member name="T:NAnt.Parallel.Tasks.ILocalPropertyProvider">
             <summary>
             Interface for providing local properties.
@@ -254,7 +148,24 @@
         </member>
         <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.localProperties">
             <summary>
-            The local properties
+            The local properties. 
+            The key of the first dictionary is the current thread.
+            The value of the first dictionary is a dictionary containing the local properties of the current thread.
+            The key of the second dictionary is the properties name.
+            The value of the second dictionary is the properties value.
+            </summary>
+        </member>
+        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.currentTaskAndNode">
+            <summary>
+            Dictionary to store the reference to the currently executed task and its XML node in the build file.
+            The key is the current thread, the value is an instance referencing the current task and its XML node.
+            </summary>
+        </member>
+        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.fieldInfo">
+            <summary>
+            Field information which contains the location of an element. As the location is not writable normally, reflection is used to set its value.
+            The root cause is that the <see cref="T:NAnt.Core.Project"/> instance doesn't known anything about the cloned XML nodes used in this task, so it cannot determine its location.
+            Solution: Inject location manually during task execution.
             </summary>
         </member>
         <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.itemsToProcessList">
@@ -267,10 +178,23 @@
             The output files queue.
             </summary>
         </member>
+        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.taskExceptions">
+            <summary>
+            The task exceptions.
+            </summary>
+        </member>
         <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.parent">
             <summary>
             The <see cref="T:NAnt.Parallel.Tasks.ParallelTask"/> instance which is the parent of this instance.
             </summary>
+        </member>
+        <member name="T:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateElement`1">
+            <summary>
+            Delegate for creating NAnt <see cref="T:NAnt.Core.Element"/> instances.
+            </summary>
+            <typeparam name="TElement">The type of the element.</typeparam>
+            <param name="node">The node.</param>
+            <returns>The created instance.</returns>
         </member>
         <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.MaxThreads">
             <summary>
@@ -306,6 +230,27 @@
               <c>true</c> if [stop on first error]; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.StopLoopOnError">
+            <summary>
+            Gets or sets a value indicating whether a &lt;do&gt; loop shall be exited after an occurred.
+            </summary>
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.ErrorDetected">
+            <summary>
+            Gets a value indicating whether [error detected].
+            </summary>
+            <value>
+              <c>true</c> if [error detected]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.NextItemToProcess">
+            <summary>
+            Gets the next item to process.
+            </summary>
+            <value>
+            The next item to process.
+            </value>
+        </member>
         <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.AddItems(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Adds the items.
@@ -332,10 +277,32 @@
             <param name="criterion">The criterion.</param>
             <param name="direction">The direction.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ExecutChildTasks">
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateAndExecutChildElements">
             <summary>
             Processes the file.
             </summary>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ExecuteChildTask(NAnt.Core.Task,System.Xml.XmlNode)">
+            <summary>
+            Executes one child task.
+            </summary>
+            <param name="task">The task.</param>
+            <param name="childNode">The child node.</param>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.Project_TaskStarted(System.Object,NAnt.Core.BuildEventArgs)">
+            <summary>
+            Handles the TaskStarted event of the current <see cref="T:NAnt.Core.Project"/> instance.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:NAnt.Core.BuildEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetNewTaskNodeInfo(NAnt.Core.Task,System.Xml.XmlNode,NAnt.Parallel.Tasks.TaskNodeInfo)">
+            <summary>
+            Sets the current task and its corresponding XML node.
+            </summary>
+            <param name="nextTask">The task which will be executed next.</param>
+            <param name="xmlNode">The XML node describing the task which will be executed next.</param>
+            <param name="taskNodeInfo">The <see cref="T:NAnt.Parallel.Tasks.TaskNodeInfo"/> instance of the last executed task.</param>
         </member>
         <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateBuildElement``1(System.Xml.XmlNode,System.Xml.XmlNode,NAnt.Parallel.Tasks.ParallelTaskContainer.CreateElement{``0})">
             <summary>
@@ -345,7 +312,7 @@
             <param name="originalNode">The original node.</param>
             <param name="clonedNode">The cloned node.</param>
             <param name="createAction">The create action.</param>
-            <returns>The created element or null if an error occured.</returns>
+            <returns>The created element or null if an error occurred.</returns>
         </member>
         <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetAdditionalElementData(NAnt.Core.Element,System.Xml.XmlNode)">
             <summary>
@@ -393,6 +360,41 @@
         <member name="F:NAnt.Parallel.Tasks.Sorting.SortingDirection.Descending">
             <summary>
             Sort source files descending.
+            </summary>
+        </member>
+        <member name="T:NAnt.Parallel.Tasks.TaskNodeInfo">
+            <summary>
+            Class to collect information about the current task and its XML node.
+            </summary>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.TaskNodeInfo.#ctor(NAnt.Core.Task,System.Xml.XmlNode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NAnt.Parallel.Tasks.TaskNodeInfo"/> class.
+            </summary>
+            <param name="task">The next executed task.</param>
+            <param name="xmlNode">The XML node of the <paramref name="task"/>.</param>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.TaskNodeInfo.#ctor(NAnt.Core.Task,System.Xml.XmlNode,NAnt.Parallel.Tasks.TaskNodeInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NAnt.Parallel.Tasks.TaskNodeInfo"/> class.
+            </summary>
+            <param name="task">The next executed task.</param>
+            <param name="xmlNode">The XML node of the <paramref name="task"/>.</param>
+            <param name="previous">The instance of the previously executed task.</param>
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.TaskNodeInfo.Task">
+            <summary>
+            Gets or sets the current task.
+            </summary>
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.TaskNodeInfo.XmlNode">
+            <summary>
+            Gets or sets the current XML node.
+            </summary>
+        </member>
+        <member name="P:NAnt.Parallel.Tasks.TaskNodeInfo.Previous">
+            <summary>
+            Gets or sets the previously used instance.
             </summary>
         </member>
         <member name="T:NAnt.Parallel.Types.BaseDataTypeCollection`1">
