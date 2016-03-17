@@ -1,8 +1,8 @@
 language: C#
 
 install:
-  - sudo apt-get update
-  - sudo apt-get install NAnt
+  - sudo apt-get update -qq
+  - sudo apt-get install NAnt -qq
 
 script:
   - mono --version
