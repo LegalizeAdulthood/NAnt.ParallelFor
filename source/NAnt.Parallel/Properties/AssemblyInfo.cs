@@ -23,6 +23,7 @@
 //   <historyitem date="2016-03-13" change="Updated version"/>
 //   <historyitem date="2016-03-15" change="Updated version"/>
 //   <historyitem date="2016-03-17" change="Updated version"/>
+//   <historyitem date="2016-03-18" change="Updated version"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -62,8 +63,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.2")]
-[assembly: AssemblyFileVersion("0.1.0.2")]
+[assembly: AssemblyVersion("0.1.0.3")]
+[assembly: AssemblyFileVersion("0.1.0.3")]
 
 [assembly: CLSCompliant(true)]
 [assembly: NeutralResourcesLanguage("en-US")]

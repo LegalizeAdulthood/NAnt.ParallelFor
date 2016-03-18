@@ -25,6 +25,7 @@
 //   <historyitem date="2016-03-14" change="Simplified property handling"/>
 //   <historyitem date="2016-03-14" change="Changed property handling and error handling, added stoplooponerror attribute"/>
 //   <historyitem date="2016-03-17" change="Fixed issue #1"/>
+//   <historyitem date="2016-03-18" change="Improved  thread safety"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 namespace NAnt.Parallel.Tasks
@@ -67,6 +68,11 @@ namespace NAnt.Parallel.Tasks
     /// Solution: Inject location manually during task execution.
     /// </summary>
     private readonly FieldInfo fieldInfo = typeof(Element).GetField("_location", BindingFlags.Instance | BindingFlags.NonPublic);
+
+    /// <summary>
+    /// Instance for locking concurrent access to NAnts type factory which seems not to be thread-safe.
+    /// </summary>
+    private readonly object typeFactoryLock = new object();
 
     /// <summary>
     /// The initial list of items to process.
@@ -328,29 +334,39 @@ namespace NAnt.Parallel.Tasks
           this.ReplaceAttributeValues(clone);
           try
           {
-            if (TypeFactory.TaskBuilders.Contains(clone.Name))
+            Task task = null;
+
+            // Lock access to type factory as it is not thread safe
+            lock (this.typeFactoryLock)
             {
-              Task task = this.CreateBuildElement(childNode, clone, this.CreateChildTask);
-              this.ExecuteChildTask(task, childNode);
-            }
-            else if (TypeFactory.DataTypeBuilders.Contains(clone.Name))
-            {
-              // we are an datatype declaration
-              DataTypeBase dataType = this.CreateBuildElement(childNode, clone, this.CreateChildDataTypeBase);
-              if (Project.DataTypeReferences.Contains(dataType.ID) == false)
+              if (TypeFactory.TaskBuilders.Contains(clone.Name))
               {
-                this.Log(Level.Debug, "Adding a {0} reference with id '{1}'.", clone.Name, dataType.ID);
-                Project.DataTypeReferences.Add(dataType.ID, dataType);
+                task = this.CreateBuildElement(childNode, clone, this.CreateChildTask);
+              }
+              else if (TypeFactory.DataTypeBuilders.Contains(clone.Name))
+              {
+                // we are an datatype declaration
+                DataTypeBase dataType = this.CreateBuildElement(childNode, clone, this.CreateChildDataTypeBase);
+                if (Project.DataTypeReferences.Contains(dataType.ID) == false)
+                {
+                  this.Log(Level.Debug, "Adding a {0} reference with id '{1}'.", clone.Name, dataType.ID);
+                  Project.DataTypeReferences.Add(dataType.ID, dataType);
+                }
+                else
+                {
+                  this.Log(Level.Debug, "Replacing a {0} reference with id '{1}'.", clone.Name, dataType.ID);
+                  Project.DataTypeReferences[dataType.ID] = dataType; // overwrite with the new reference.
+                }
               }
               else
               {
-                this.Log(Level.Debug, "Replacing a {0} reference with id '{1}'.", clone.Name, dataType.ID);
-                Project.DataTypeReferences[dataType.ID] = dataType; // overwrite with the new reference.
+                throw new BuildException($"Error during processing node {childNode.Name}");
               }
             }
-            else
+
+            if (task != null)
             {
-              throw new BuildException($"Error during processing node {childNode.Name}");
+              this.ExecuteChildTask(task, childNode);
             }
           }
           catch (Exception ex)
@@ -490,7 +506,7 @@ namespace NAnt.Parallel.Tasks
     {
       if (xmlNode != null)
       {
-        this.fieldInfo.SetValue(nextTask, Project.GetLocation(xmlNode));
+        this.SetElementLocation(nextTask, xmlNode);
       }
         
       lock (this.currentTaskAndNode)
@@ -525,9 +541,22 @@ namespace NAnt.Parallel.Tasks
 
       // Transfer location information, it got lost by creating the task instance using a clone
       // Use reflection because location cannot be overriden normally      
+      this.SetElementLocation(element, childNode);
+    }
+
+    /// <summary>
+    /// Sets the element location.
+    /// </summary>
+    /// <param name="element">The element.</param>
+    /// <param name="elementNode">The element node.</param>
+    private void SetElementLocation(Element element, XmlNode elementNode)
+    {
       if (this.fieldInfo != null)
       {
-        this.fieldInfo.SetValue(element, Project.GetLocation(childNode));
+        lock (this.fieldInfo)
+        {
+          this.fieldInfo.SetValue(element, Project.GetLocation(elementNode));
+        }
       }
     }
 

@@ -168,6 +168,11 @@
             Solution: Inject location manually during task execution.
             </summary>
         </member>
+        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.typeFactoryLock">
+            <summary>
+            Instance for locking concurrent access to NAnts type factory which seems not to be thread-safe.
+            </summary>
+        </member>
         <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.itemsToProcessList">
             <summary>
             The initial list of items to process.
@@ -320,6 +325,13 @@
             </summary>
             <param name="element">The element.</param>
             <param name="childNode">The original child node.</param>
+        </member>
+        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetElementLocation(NAnt.Core.Element,System.Xml.XmlNode)">
+            <summary>
+            Sets the element location.
+            </summary>
+            <param name="element">The element.</param>
+            <param name="elementNode">The element node.</param>
         </member>
         <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ReplaceAttributeValues(System.Xml.XmlNode)">
             <summary>
