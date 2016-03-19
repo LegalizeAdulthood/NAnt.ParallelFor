@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="NAnt.CrossCompile team">
 //
-// NAnt.Parallel, an extension for NAnt for parallel task execution.
+// NAnt.ParallelFor, an extension for NAnt for parallel task execution.
 // Copyright (C) 2016 NAnt.CrossCompile team.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -24,6 +24,7 @@
 //   <historyitem date="2016-03-15" change="Updated version"/>
 //   <historyitem date="2016-03-17" change="Updated version"/>
 //   <historyitem date="2016-03-18" change="Updated version"/>
+//   <historyitem date="2016-03-19" change="Renamed from parallel to parallelfor, updated version"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -36,11 +37,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NAnt.Parallel")]
+[assembly: AssemblyTitle("NAnt.ParallelFor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NAnt.Parallel")]
+[assembly: AssemblyProduct("NAnt.ParallelFor")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -63,10 +64,10 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.3")]
-[assembly: AssemblyFileVersion("0.1.0.3")]
+[assembly: AssemblyVersion("0.2.0.1")]
+[assembly: AssemblyFileVersion("0.2.0.1")]
 
 [assembly: CLSCompliant(true)]
 [assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: InternalsVisibleTo("NAnt.Parallel.Tests")]
+[assembly: InternalsVisibleTo("NAnt.ParallelFor.Tests")]

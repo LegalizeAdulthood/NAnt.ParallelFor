@@ -1,16 +1,33 @@
 <project default="all">
-  <target name="all" depends="zip"/>
+  <target name="all" depends="build, zip"/>
+  
+  <target name="build">
+    <exec program="C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe">
+      <arg value="source/NAnt.ParallelFor.sln"/>
+      <arg value="/p:Configuration=Release"/>
+      <arg value="/t:Clean,Build"/>
+    </exec>
+  </target>
   
   <target name="zip">
+    <property name="assembly" value="build/Release/NAnt.ParallelFor.dll"/>
+    <property name="major" value="${version::get-major((fileversioninfo::get-file-version(fileversioninfo::get-version-info(assembly))))}" />
+    <property name="minor" value="${version::get-minor((fileversioninfo::get-file-version(fileversioninfo::get-version-info(assembly))))}" />
+    <property name="build" value="${version::get-build((fileversioninfo::get-file-version(fileversioninfo::get-version-info(assembly))))}" />
+    <property name="revision" value="${version::get-revision((fileversioninfo::get-file-version(fileversioninfo::get-version-info(assembly))))}" />
+    <property name="versionString" value="${major}.${minor}.${build}"/>
+    <if test="${revision != '0'}">
+      <property name="versionString" value="${versionString}beta${revision}"/>
+    </if>
     <delete>
       <fileset>
-        <include name="NAnt.Parallel-*.zip"/>
+        <include name="NAnt.ParallelFor-*.zip"/>
       </fileset>
     </delete>
     
-    <zip zipfile="NAnt.Parallel-travis.zip">
+    <zip zipfile="NAnt.ParallelFor-${versionString}.zip">
       <fileset basedir="build/Release">
-        <include name="NAnt.Parallel.*"/>
+        <include name="NAnt.ParallelFor.*"/>
         <exclude name="*.pdb"/>
       </fileset>
       <fileset>
