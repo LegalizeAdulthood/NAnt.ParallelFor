@@ -11,6 +11,8 @@ Current Travis status:
 
 [![Build Status](https://travis-ci.org/NAntCrossCompile/NAnt.DependencyToFileset.svg?branch=master)](https://travis-ci.org/NAntCrossCompile/NAnt.DependencyToFileset)
 
+Have a look at the [Wiki](/wiki) for a detailed task description.
+
 ## Remarks
 * Access to the loop property is only available in the &lt;do&gt; block of the task and will only work in XML attributes.
 * Although the order of the input can be specified by the orderby attribute, the execution order can vary due to the execution time required for one item.
