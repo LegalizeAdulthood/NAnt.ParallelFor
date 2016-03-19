@@ -1,11 +1,25 @@
 <project default="all">
-  <target name="all" depends="build, zip"/>
+  <target name="all" depends="clean, build, zip"/>
   
-  <target name="build">
-    <exec program="C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe">
+  <property name="msbuild" value="C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe"/>
+  <property name="xbuild" value="/opt/mono/bin/xbuild"/>
+  
+  <property name="buildCommand" value="${msbuild}" if="${file::exists(msbuild)}"/>
+  <property name="buildCommand" value="${xbuild}" if="${file::exists(xbuild)}"/>
+  
+  <target name="clean">
+    <exec program="${buildCommand}">
       <arg value="source/NAnt.ParallelFor.sln"/>
       <arg value="/p:Configuration=Release"/>
-      <arg value="/t:Clean,Build"/>
+      <arg value="/t:Clean"/>
+    </exec>
+  </target>
+
+  <target name="build">   
+    <exec program="${buildCommand}">
+      <arg value="source/NAnt.ParallelFor.sln"/>
+      <arg value="/p:Configuration=Release"/>
+      <arg value="/t:Build"/>
     </exec>
   </target>
   
