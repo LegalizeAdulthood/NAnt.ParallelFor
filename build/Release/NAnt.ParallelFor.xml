@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>NAnt.Parallel</name>
+        <name>NAnt.ParallelFor</name>
     </assembly>
     <members>
-        <member name="T:NAnt.Parallel.Tasks.ILocalPropertyProvider">
+        <member name="T:NAnt.ParallelFor.Tasks.ILocalPropertyProvider">
             <summary>
             Interface for providing local properties.
             </summary>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ILocalPropertyProvider.AddProperty(System.String,System.String)">
+        <member name="M:NAnt.ParallelFor.Tasks.ILocalPropertyProvider.AddProperty(System.String,System.String)">
             <summary>
             Adds the property.
             </summary>
             <param name="propertyName">Name of the property.</param>
             <param name="propertyValue">The property value.</param>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.LocalPropertyTask">
+        <member name="T:NAnt.ParallelFor.Tasks.LocalPropertyTask">
             <summary>
             Task which handles local properties.
             </summary>
             <seealso cref="T:NAnt.Core.Task" />
         </member>
-        <member name="P:NAnt.Parallel.Tasks.LocalPropertyTask.PropertyName">
+        <member name="P:NAnt.ParallelFor.Tasks.LocalPropertyTask.PropertyName">
             <summary>
             Gets or sets the name of the property.
             </summary>
@@ -30,7 +30,7 @@
             The name of the property.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.LocalPropertyTask.PropertyValue">
+        <member name="P:NAnt.ParallelFor.Tasks.LocalPropertyTask.PropertyValue">
             <summary>
             Gets or sets the property value.
             </summary>
@@ -38,18 +38,18 @@
             The property value.
             </value>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.LocalPropertyTask.ExecuteTask">
+        <member name="M:NAnt.ParallelFor.Tasks.LocalPropertyTask.ExecuteTask">
             <summary>
             Executes the task.
             </summary>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.ParallelTask">
+        <member name="T:NAnt.ParallelFor.Tasks.ParallelForTask">
             <summary>
             A NAnt task which allows parallel execution.
             </summary>
             <seealso cref="T:NAnt.Core.Task" />
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.Property">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.Property">
             <summary>
             Gets or sets the property.
             </summary>
@@ -57,19 +57,19 @@
             The property.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.InputFilesCollection">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.InputFilesCollection">
             <summary>
             Gets the input files for the task by passing one or more NAnt <see cref="T:NAnt.Core.Types.FileSet"/> items.
-            The files specified by the <see cref="P:NAnt.Parallel.Tasks.ParallelTask.InputFilesCollection"/> element are always processed before the files specified by the 
-            <see cref="P:NAnt.Parallel.Tasks.ParallelTask.InputFilesCollection"/> elements.
+            The files specified by the <see cref="P:NAnt.ParallelFor.Tasks.ParallelForTask.InputFilesCollection"/> element are always processed before the files specified by the 
+            <see cref="P:NAnt.ParallelFor.Tasks.ParallelForTask.InputFilesCollection"/> elements.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.ItemType">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.ItemType">
             <summary>
             Gets or sets the type of iteration that should be done.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.TaskContainer">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.TaskContainer">
             <summary>
             Gets or sets the task container.
             </summary>
@@ -77,17 +77,17 @@
             The task container.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.Source">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.Source">
             <summary>
             Gets or sets the source of the iteration.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.Delimiter">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.Delimiter">
             <summary>
             Gets or sets the delimiter char.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTask.StringSplitOptions">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelForTask.StringSplitOptions">
             <summary>
             Gets or sets the string split options.
             </summary>
@@ -95,12 +95,12 @@
             The string split options.
             </value>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTask">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelForTask.ExecuteTask">
             <summary>
             Executes the task.
             </summary>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithStrings">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelForTask.ExecuteTaskWithStrings">
             <summary>
             Executes the task with strings.
             </summary>
@@ -110,7 +110,7 @@
             @The delimiter attribute must be set for looping over strings
             </exception>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithLines">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelForTask.ExecuteTaskWithLines">
             <summary>
             Executes the task with lines.
             </summary>
@@ -120,7 +120,7 @@
             @The file specified by the in attribute doesn't exist
             </exception>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithFiles">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelForTask.ExecuteTaskWithFiles">
             <summary>
             Executes the task with files.
             </summary>
@@ -130,7 +130,7 @@
             @The directory specified by the in attribute doesn't exist
             </exception>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTask.ExecuteTaskWithDirectories">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelForTask.ExecuteTaskWithDirectories">
             <summary>
             Executes the task with directories.
             </summary>
@@ -140,13 +140,20 @@
             @The directory specified by the in attribute doesn't exist
             </exception>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.ParallelTaskContainer">
+        <member name="T:NAnt.ParallelFor.Tasks.ParallelTask">
+            <summary>
+            Deprecated implementation of the parallel task.
+            Will be removed in future to differ from Ants parallel task.
+            </summary>
+            <seealso cref="T:NAnt.ParallelFor.Tasks.ParallelForTask" />
+        </member>
+        <member name="T:NAnt.ParallelFor.Tasks.ParallelTaskContainer">
             <summary>
             Task container which executes the tasks in parallel.
             </summary>
             <seealso cref="T:NAnt.Core.TaskContainer" />
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.localProperties">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.localProperties">
             <summary>
             The local properties. 
             The key of the first dictionary is the current thread.
@@ -155,45 +162,45 @@
             The value of the second dictionary is the properties value.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.currentTaskAndNode">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.currentTaskAndNode">
             <summary>
             Dictionary to store the reference to the currently executed task and its XML node in the build file.
             The key is the current thread, the value is an instance referencing the current task and its XML node.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.fieldInfo">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.fieldInfo">
             <summary>
             Field information which contains the location of an element. As the location is not writable normally, reflection is used to set its value.
             The root cause is that the <see cref="T:NAnt.Core.Project"/> instance doesn't known anything about the cloned XML nodes used in this task, so it cannot determine its location.
             Solution: Inject location manually during task execution.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.typeFactoryLock">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.typeFactoryLock">
             <summary>
             Instance for locking concurrent access to NAnts type factory which seems not to be thread-safe.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.itemsToProcessList">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.itemsToProcessList">
             <summary>
             The initial list of items to process.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.itemsToProcessQueue">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.itemsToProcessQueue">
             <summary>
             The output files queue.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.taskExceptions">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.taskExceptions">
             <summary>
             The task exceptions.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.ParallelTaskContainer.parent">
+        <member name="F:NAnt.ParallelFor.Tasks.ParallelTaskContainer.parent">
             <summary>
-            The <see cref="T:NAnt.Parallel.Tasks.ParallelTask"/> instance which is the parent of this instance.
+            The <see cref="T:NAnt.ParallelFor.Tasks.ParallelForTask"/> instance which is the parent of this instance.
             </summary>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateElement`1">
+        <member name="T:NAnt.ParallelFor.Tasks.ParallelTaskContainer.CreateElement`1">
             <summary>
             Delegate for creating NAnt <see cref="T:NAnt.Core.Element"/> instances.
             </summary>
@@ -201,7 +208,7 @@
             <param name="node">The node.</param>
             <returns>The created instance.</returns>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.MaxThreads">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.MaxThreads">
             <summary>
             Gets or sets the maximum number of threads which are used for parallel execution.
             The default is the number of CPU cores. Increasing this value is only reasonable if more than one output file will be created.
@@ -210,7 +217,7 @@
             The max number of threads.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.OrderBy">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.OrderBy">
             <summary>
             Gets or sets a value indicating how the task will sort the source files before execution.
             </summary>
@@ -218,7 +225,7 @@
             The value indicating how the task will sort the source files before execution.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.SortingDirection">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.SortingDirection">
             <summary>
             Gets or sets the sorting direction.
             </summary>
@@ -226,7 +233,7 @@
             The sorting direction.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.StopOnFirstError">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.StopOnFirstError">
             <summary>
             Gets or sets a value indicating whether the execution should be stopped on the first occurring error.
             The default value is <see langword="false"/>.
@@ -235,12 +242,12 @@
               <c>true</c> if [stop on first error]; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.StopLoopOnError">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.StopLoopOnError">
             <summary>
             Gets or sets a value indicating whether a &lt;do&gt; loop shall be exited after an occurred.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.ErrorDetected">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.ErrorDetected">
             <summary>
             Gets a value indicating whether [error detected].
             </summary>
@@ -248,7 +255,7 @@
               <c>true</c> if [error detected]; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.ParallelTaskContainer.NextItemToProcess">
+        <member name="P:NAnt.ParallelFor.Tasks.ParallelTaskContainer.NextItemToProcess">
             <summary>
             Gets the next item to process.
             </summary>
@@ -256,25 +263,25 @@
             The next item to process.
             </value>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.AddItems(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.AddItems(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Adds the items.
             </summary>
             <param name="items">The items.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.AddProperty(System.String,System.String)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.AddProperty(System.String,System.String)">
             <summary>
             Adds the property.
             </summary>
             <param name="propertyName">Name of the property.</param>
             <param name="propertyValue">The property value.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ExecuteTask">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.ExecuteTask">
             <summary>
             Executes the task.
             </summary>    
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SortSourceFiles(System.Collections.Generic.List{System.String},NAnt.Parallel.Tasks.Sorting.SortingCriterion,NAnt.Parallel.Tasks.Sorting.SortingDirection)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.SortSourceFiles(System.Collections.Generic.List{System.String},NAnt.ParallelFor.Tasks.Sorting.SortingCriterion,NAnt.ParallelFor.Tasks.Sorting.SortingDirection)">
             <summary>
             Sorts the source files.
             </summary>
@@ -282,34 +289,34 @@
             <param name="criterion">The criterion.</param>
             <param name="direction">The direction.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateAndExecutChildElements">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.CreateAndExecutChildElements">
             <summary>
             Processes the file.
             </summary>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ExecuteChildTask(NAnt.Core.Task,System.Xml.XmlNode)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.ExecuteChildTask(NAnt.Core.Task,System.Xml.XmlNode)">
             <summary>
             Executes one child task.
             </summary>
             <param name="task">The task.</param>
             <param name="childNode">The child node.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.Project_TaskStarted(System.Object,NAnt.Core.BuildEventArgs)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.Project_TaskStarted(System.Object,NAnt.Core.BuildEventArgs)">
             <summary>
             Handles the TaskStarted event of the current <see cref="T:NAnt.Core.Project"/> instance.
             </summary>
             <param name="sender">The source of the event.</param>
             <param name="e">The <see cref="T:NAnt.Core.BuildEventArgs"/> instance containing the event data.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetNewTaskNodeInfo(NAnt.Core.Task,System.Xml.XmlNode,NAnt.Parallel.Tasks.TaskNodeInfo)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.SetNewTaskNodeInfo(NAnt.Core.Task,System.Xml.XmlNode,NAnt.ParallelFor.Tasks.TaskNodeInfo)">
             <summary>
             Sets the current task and its corresponding XML node.
             </summary>
             <param name="nextTask">The task which will be executed next.</param>
             <param name="xmlNode">The XML node describing the task which will be executed next.</param>
-            <param name="taskNodeInfo">The <see cref="T:NAnt.Parallel.Tasks.TaskNodeInfo"/> instance of the last executed task.</param>
+            <param name="taskNodeInfo">The <see cref="T:NAnt.ParallelFor.Tasks.TaskNodeInfo"/> instance of the last executed task.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.CreateBuildElement``1(System.Xml.XmlNode,System.Xml.XmlNode,NAnt.Parallel.Tasks.ParallelTaskContainer.CreateElement{``0})">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.CreateBuildElement``1(System.Xml.XmlNode,System.Xml.XmlNode,NAnt.ParallelFor.Tasks.ParallelTaskContainer.CreateElement{``0})">
             <summary>
             Creates the build element.
             </summary>
@@ -319,114 +326,114 @@
             <param name="createAction">The create action.</param>
             <returns>The created element or null if an error occurred.</returns>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetAdditionalElementData(NAnt.Core.Element,System.Xml.XmlNode)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.SetAdditionalElementData(NAnt.Core.Element,System.Xml.XmlNode)">
             <summary>
             Sets the additional element data.
             </summary>
             <param name="element">The element.</param>
             <param name="childNode">The original child node.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.SetElementLocation(NAnt.Core.Element,System.Xml.XmlNode)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.SetElementLocation(NAnt.Core.Element,System.Xml.XmlNode)">
             <summary>
             Sets the element location.
             </summary>
             <param name="element">The element.</param>
             <param name="elementNode">The element node.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.ParallelTaskContainer.ReplaceAttributeValues(System.Xml.XmlNode)">
+        <member name="M:NAnt.ParallelFor.Tasks.ParallelTaskContainer.ReplaceAttributeValues(System.Xml.XmlNode)">
             <summary>
             Replaces the attribute values.
             </summary>
             <param name="xmlNode">The cloned XML node.</param>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.Sorting.SortingCriterion">
+        <member name="T:NAnt.ParallelFor.Tasks.Sorting.SortingCriterion">
             <summary>
             Determines how the task will sort the input before execution.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.Sorting.SortingCriterion.None">
+        <member name="F:NAnt.ParallelFor.Tasks.Sorting.SortingCriterion.None">
             <summary>
             Source files will not be sorted.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.Sorting.SortingCriterion.Name">
+        <member name="F:NAnt.ParallelFor.Tasks.Sorting.SortingCriterion.Name">
             <summary>
             Source files will be sorted by file name.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.Sorting.SortingCriterion.Size">
+        <member name="F:NAnt.ParallelFor.Tasks.Sorting.SortingCriterion.Size">
             <summary>
             Source files will be sorted by file size.
             </summary>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.Sorting.SortingDirection">
+        <member name="T:NAnt.ParallelFor.Tasks.Sorting.SortingDirection">
             <summary>
             Sorting direction for a tasks input.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.Sorting.SortingDirection.Ascending">
+        <member name="F:NAnt.ParallelFor.Tasks.Sorting.SortingDirection.Ascending">
             <summary>
             Sort source files ascending.
             </summary>
         </member>
-        <member name="F:NAnt.Parallel.Tasks.Sorting.SortingDirection.Descending">
+        <member name="F:NAnt.ParallelFor.Tasks.Sorting.SortingDirection.Descending">
             <summary>
             Sort source files descending.
             </summary>
         </member>
-        <member name="T:NAnt.Parallel.Tasks.TaskNodeInfo">
+        <member name="T:NAnt.ParallelFor.Tasks.TaskNodeInfo">
             <summary>
             Class to collect information about the current task and its XML node.
             </summary>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.TaskNodeInfo.#ctor(NAnt.Core.Task,System.Xml.XmlNode)">
+        <member name="M:NAnt.ParallelFor.Tasks.TaskNodeInfo.#ctor(NAnt.Core.Task,System.Xml.XmlNode)">
             <summary>
-            Initializes a new instance of the <see cref="T:NAnt.Parallel.Tasks.TaskNodeInfo"/> class.
+            Initializes a new instance of the <see cref="T:NAnt.ParallelFor.Tasks.TaskNodeInfo"/> class.
             </summary>
             <param name="task">The next executed task.</param>
             <param name="xmlNode">The XML node of the <paramref name="task"/>.</param>
         </member>
-        <member name="M:NAnt.Parallel.Tasks.TaskNodeInfo.#ctor(NAnt.Core.Task,System.Xml.XmlNode,NAnt.Parallel.Tasks.TaskNodeInfo)">
+        <member name="M:NAnt.ParallelFor.Tasks.TaskNodeInfo.#ctor(NAnt.Core.Task,System.Xml.XmlNode,NAnt.ParallelFor.Tasks.TaskNodeInfo)">
             <summary>
-            Initializes a new instance of the <see cref="T:NAnt.Parallel.Tasks.TaskNodeInfo"/> class.
+            Initializes a new instance of the <see cref="T:NAnt.ParallelFor.Tasks.TaskNodeInfo"/> class.
             </summary>
             <param name="task">The next executed task.</param>
             <param name="xmlNode">The XML node of the <paramref name="task"/>.</param>
             <param name="previous">The instance of the previously executed task.</param>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.TaskNodeInfo.Task">
+        <member name="P:NAnt.ParallelFor.Tasks.TaskNodeInfo.Task">
             <summary>
             Gets or sets the current task.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.TaskNodeInfo.XmlNode">
+        <member name="P:NAnt.ParallelFor.Tasks.TaskNodeInfo.XmlNode">
             <summary>
             Gets or sets the current XML node.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Tasks.TaskNodeInfo.Previous">
+        <member name="P:NAnt.ParallelFor.Tasks.TaskNodeInfo.Previous">
             <summary>
             Gets or sets the previously used instance.
             </summary>
         </member>
-        <member name="T:NAnt.Parallel.Types.BaseDataTypeCollection`1">
+        <member name="T:NAnt.ParallelFor.Types.BaseDataTypeCollection`1">
             <summary>
             A generic collection implementation which contains elements of the type <see cref="T:NAnt.Core.DataTypeBase" />.
             </summary>
             <typeparam name="T">The type of the collection items.</typeparam>
         </member>
-        <member name="F:NAnt.Parallel.Types.BaseDataTypeCollection`1.internalCollection">
+        <member name="F:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.internalCollection">
             <summary>
             The internal collection used for this instance.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Types.BaseDataTypeCollection`1.Count">
+        <member name="P:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.Count">
             <summary>
             Gets the number of elements contained in the <see cref="T:System.Collections.ICollection" />.
             </summary>
             <returns>The number of elements contained in the <see cref="T:System.Collections.ICollection" />.</returns>
         </member>
-        <member name="P:NAnt.Parallel.Types.BaseDataTypeCollection`1.IsReadOnly">
+        <member name="P:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.IsReadOnly">
             <summary>
             Gets a value indicating whether this instance is read only.
             </summary>
@@ -434,34 +441,34 @@
             <c>true</c> if this instance is read only; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:NAnt.Parallel.Types.BaseDataTypeCollection`1.IsSynchronized">
+        <member name="P:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.IsSynchronized">
             <summary>
             Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized (thread safe).    
             </summary>    
             <returns>true if access to the  <see cref="T:System.Collections.ICollection" /> is synchronized (thread safe); otherwise, false. 
             In the default implementation of Collection, this property always returns false.</returns>
         </member>
-        <member name="P:NAnt.Parallel.Types.BaseDataTypeCollection`1.SyncRoot">
+        <member name="P:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.SyncRoot">
             <summary>
             Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.    
             </summary>
             <returns>An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
             In the default implementation of Collection, this property always returns the current instance.</returns>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.Add(`0)">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.Add(`0)">
             <summary>
             Adds a item to the end of the collection.
             </summary>
             <param name="item">The item to be added to the end of the collection.</param> 
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>
             Adds the elements of the specified collection to the end of the List.
             </summary>
             <param name="collection">The collection whose elements should be added to the end of the List. 
             The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.Contains(`0)">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.Contains(`0)">
             <summary>
             Determines whether a item is in the collection.
             </summary>
@@ -471,14 +478,14 @@
             collection; otherwise, <see langword="false" />.
             </returns>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.CopyTo(`0[],System.Int32)">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.CopyTo(`0[],System.Int32)">
             <summary>
             Copies the entire collection to a compatible one-dimensional array, starting at the specified index of the target array.        
             </summary>
             <param name="array">The one-dimensional array that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param> 
             <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.Remove(`0)">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.Remove(`0)">
             <summary>
             Removes a member from the collection.
             </summary>
@@ -488,7 +495,7 @@
             This method also returns false if item is not found in the original Collection.
             </returns>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.GetEnumerator">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.GetEnumerator">
             <summary>
             Returns an enumerator that iterates through a collection.
             </summary>
@@ -496,12 +503,12 @@
             An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
             </returns>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.Clear">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.Clear">
             <summary>
             Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.
             </summary>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.System#Collections#IEnumerable#GetEnumerator">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.System#Collections#IEnumerable#GetEnumerator">
             <summary>
             Returns an enumerator that iterates through a collection.
             </summary>
@@ -509,7 +516,7 @@
             An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
             </returns>
         </member>
-        <member name="M:NAnt.Parallel.Types.BaseDataTypeCollection`1.CopyTo(System.Array,System.Int32)">
+        <member name="M:NAnt.ParallelFor.Types.BaseDataTypeCollection`1.CopyTo(System.Array,System.Int32)">
             <summary>
             Copies the elements of the <see cref="T:System.Collections.ICollection" /> to an <see cref="T:System.Array" />, 
             starting at a particular <see cref="T:System.Array" /> index.    
@@ -520,12 +527,12 @@
             <param name="index">
             The zero-based index in <paramref name="array" /> at which copying begins.</param>
         </member>
-        <member name="T:NAnt.Parallel.Types.FileSetCollection">
+        <member name="T:NAnt.ParallelFor.Types.FileSetCollection">
             <summary>
             This type allows grouping of multiple NAnt <see cref="T:NAnt.Core.Types.FileSet"/> elements.
             </summary>
         </member>
-        <member name="P:NAnt.Parallel.Types.FileSetCollection.Items">
+        <member name="P:NAnt.ParallelFor.Types.FileSetCollection.Items">
             <summary>
             Gets the items.
             </summary>
@@ -533,14 +540,14 @@
             The items.
             </value>
         </member>
-        <member name="M:NAnt.Parallel.Types.FileSetCollection.GetAllFilesUsingRelativePaths(System.Uri)">
+        <member name="M:NAnt.ParallelFor.Types.FileSetCollection.GetAllFilesUsingRelativePaths(System.Uri)">
             <summary>
             Gets all files using relative paths.
             </summary>
             <param name="baseUri">The project base URI.</param>
             <returns>A list containing all files of the instance relative to the <paramref name="baseUri"/> parameter.</returns>
         </member>
-        <member name="M:NAnt.Parallel.Types.FileSetCollection.GetAllDirectoriesUsingRelativePaths(System.Uri)">
+        <member name="M:NAnt.ParallelFor.Types.FileSetCollection.GetAllDirectoriesUsingRelativePaths(System.Uri)">
             <summary>
             Gets all directories using relative paths.
             </summary>

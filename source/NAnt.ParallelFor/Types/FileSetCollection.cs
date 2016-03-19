@@ -21,9 +21,10 @@
 //   <historyitem date="2016-03-11" change="Created file based on FileSetCollection.cs of NAnt.Crosscompile 0.7.4.1"/>
 //   <historyitem date="2016-03-12" change="Fixed file header"/>
 //   <historyitem date="2016-03-13" change="Fixed method headers"/>
+//   <historyitem date="2016-03-19" change="Renamed from parallel to parallelfor"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
-namespace NAnt.Parallel.Types
+namespace NAnt.ParallelFor.Types
 {
   using System;
   using System.Collections.Generic;

@@ -26,9 +26,10 @@
 //   <historyitem date="2016-03-14" change="Changed property handling and error handling, added stoplooponerror attribute"/>
 //   <historyitem date="2016-03-17" change="Fixed issue #1"/>
 //   <historyitem date="2016-03-18" change="Improved  thread safety"/>
+//   <historyitem date="2016-03-19" change="Renamed from parallel to parallelfor"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
-namespace NAnt.Parallel.Tasks
+namespace NAnt.ParallelFor.Tasks
 {
   using System;
   using System.Collections.Generic;

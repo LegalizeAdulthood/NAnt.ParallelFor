@@ -7,8 +7,8 @@
     <ProjectGuid>{FE7FABB4-48D4-4B2C-86F2-5E0D7C549B25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NAnt.Parallel</RootNamespace>
-    <AssemblyName>NAnt.Parallel</AssemblyName>
+    <RootNamespace>NAnt.ParallelFor</RootNamespace>
+    <AssemblyName>NAnt.ParallelFor</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Debug\NAnt.Parallel.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Debug\NAnt.ParallelFor.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Release\NAnt.Parallel.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Release\NAnt.ParallelFor.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NAnt.Core">

@@ -19,9 +19,10 @@
 // </copyright>
 // <history>
 //   <historyitem date="2016-03-13" change="Created file"/>
+//   <historyitem date="2016-03-19" change="Renamed from parallel to parallelfor"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
-namespace NAnt.Parallel.Tasks
+namespace NAnt.ParallelFor.Tasks
 {
   using Core;
   using Core.Attributes;

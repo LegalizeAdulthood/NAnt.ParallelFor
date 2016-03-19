@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SortingDirection.cs" company="NAnt.CrossCompile team">
+// <copyright file="ParallelTask.cs" company="NAnt.CrossCompile team">
 //
 // NAnt.Parallel, an extension for NAnt for parallel task execution.
 // Copyright (C) 2016 NAnt.CrossCompile team.
@@ -18,26 +18,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/. 
 // </copyright>
 // <history>
-//   <historyitem date="2016-03-11" change="Created file based on SortingDirection.cs of NAnt.Crosscompile 0.7.4.1"/>
-//   <historyitem date="2016-03-12" change="Fixed file header"/>
-//   <historyitem date="2016-03-19" change="Renamed from parallel to parallelfor"/>
+//   <historyitem date="2016-03-19" change="Created file"/>
 // </history>
 // --------------------------------------------------------------------------------------------------------------------
-namespace NAnt.ParallelFor.Tasks.Sorting
+namespace NAnt.ParallelFor.Tasks
 {
-  /// <summary>
-  /// Sorting direction for a tasks input.
-  /// </summary>
-  public enum SortingDirection
-  {
-    /// <summary>
-    /// Sort source files ascending.
-    /// </summary>
-    Ascending,
+  using System;
+  using Core.Attributes;
 
-    /// <summary>
-    /// Sort source files descending.
-    /// </summary>
-    Descending,
+  /// <summary>
+  /// Deprecated implementation of the parallel task.
+  /// Will be removed in future to differ from Ants parallel task.
+  /// </summary>
+  /// <seealso cref="ParallelForTask" />
+  [TaskName("parallel")]
+  [Obsolete("The <parallel> task will be removed in future releases. Use <parallelfor> instead.")]
+  public class ParallelTask : ParallelForTask
+  {
   }
 }
