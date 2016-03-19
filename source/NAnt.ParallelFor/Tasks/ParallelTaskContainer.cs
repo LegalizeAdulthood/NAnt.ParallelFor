@@ -90,9 +90,9 @@ namespace NAnt.Parallel.Tasks
     private readonly List<BuildException> taskExceptions = new List<BuildException>();
 
     /// <summary>
-    /// The <see cref="ParallelTask"/> instance which is the parent of this instance.
+    /// The <see cref="ParallelForTask"/> instance which is the parent of this instance.
     /// </summary>
-    private ParallelTask parent;
+    private ParallelForTask parent;
 
     /// <summary>
     /// Delegate for creating NAnt <see cref="Element"/> instances.
@@ -212,7 +212,7 @@ namespace NAnt.Parallel.Tasks
     /// </summary>    
     protected override void ExecuteTask()
     {
-      this.parent = this.Parent as ParallelTask;
+      this.parent = this.Parent as ParallelForTask;
 
       if (this.parent == null)
       {

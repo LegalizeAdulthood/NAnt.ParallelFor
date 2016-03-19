@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ParallelTask.cs" company="NAnt.CrossCompile team">
+// <copyright file="ParallelForTask.cs" company="NAnt.CrossCompile team">
 //
 // NAnt.Parallel, an extension for NAnt for parallel task execution.
 // Copyright (C) 2016 NAnt.CrossCompile team.
@@ -36,8 +36,8 @@ namespace NAnt.Parallel.Tasks
   /// A NAnt task which allows parallel execution.
   /// </summary>
   /// <seealso cref="Task" />
-  [TaskName("parallel")]
-  public class ParallelTask : Task
+  [TaskName("parallelfor")]
+  public class ParallelForTask : Task
   {
     /// <summary>
     /// Gets or sets the property.
