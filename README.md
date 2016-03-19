@@ -6,6 +6,7 @@ Attention: Starting with version 0.2.0beta1, the &lt;parallel&gt; task has been 
 This plugin allows you to execute a sequence of task for a set of files, directories, file lines or string items. It's similar to NAnt's foreach task (http://nant.sourceforge.net/release/0.92/help/tasks/foreach.html), but allows you to execute the tasks in parallel for each item.
 
 The plugin is still under development. If you find any bugs or request a feature, feel free to create an issue.
+
 Current Travis status: [![Build Status](https://travis-ci.org/NAntCrossCompile/NAnt.Parallel.svg?branch=master)](https://travis-ci.org/NAntCrossCompile/NAnt.Parallel)
 
 ## Remarks
