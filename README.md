@@ -1,4 +1,4 @@
-# NAnt.Parallel
+# NAnt.ParallelFor
 An extension for NAnt for parallel task execution
 
 This plugin allows you to execute a sequence of task for a set of files, directories, file lines or string items. It's similar to NAnt's foreach task (http://nant.sourceforge.net/release/0.92/help/tasks/foreach.html), but allows you to execute the tasks in parallel for each item.
@@ -15,7 +15,7 @@ The plugin is still under development. If you find any bugs or request a feature
 ## Examples
 ### Looping over files
 ```xml
-<parallel item="File" property="file">
+<paralellfor item="File" property="file">
   <in>
     <items>
       <include name="**/*.c"/>
@@ -29,12 +29,12 @@ The plugin is still under development. If you find any bugs or request a feature
       <arg value="${file}"/>
     </exec>
   </do>
-</parallel>
+</paralellfor>
 ```
 
 ### Looping over directories
 ```xml
-<parallel item="Folder" property="directory">
+<paralellfor item="Folder" property="directory">
   <in>
     <items>
       <include name="*"/>
@@ -48,12 +48,12 @@ The plugin is still under development. If you find any bugs or request a feature
       <arg value="@{directory}"/>
     </exec>
   </do>
-</parallel>
+</paralellfor>
 ```
 
 ### Looping over string items
 ```xml
-<parallel item="String" property="stringItem" delim=";" in="Item1;Item2;Item3;Item4">
+<paralellfor item="String" property="stringItem" delim=";" in="Item1;Item2;Item3;Item4">
   <do maxthreads="8" orderby="Name">      
     <echo message="String Item: ${stringItem}"/>
     <exec program="cmd.exe">
@@ -62,12 +62,12 @@ The plugin is still under development. If you find any bugs or request a feature
       <arg value="${stringItem}"/>
     </exec>
   </do>
-</parallel>
+</paralellfor>
 ```
 
 ### Looping over lines of a file
 ```xml
-<parallel item="Line" property="lineContent" in="SampleFile.txt">
+<paralellfor item="Line" property="lineContent" in="SampleFile.txt">
   <do maxthreads="8" orderby="Name">      
     <echo message="Line: ${lineContent}"/>
     <exec program="cmd.exe">
@@ -76,5 +76,5 @@ The plugin is still under development. If you find any bugs or request a feature
       <arg value="${lineContent}"/>
     </exec>
   </do>
-</parallel>
+</paralellfor>
 ```
