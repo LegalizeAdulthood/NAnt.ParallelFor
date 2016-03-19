@@ -9,7 +9,7 @@ The plugin is still under development. If you find any bugs or request a feature
 
 Current Travis status: 
 
-[![Build Status](https://travis-ci.org/NAntCrossCompile/NAnt.Parallel.svg?branch=master)](https://travis-ci.org/NAntCrossCompile/NAnt.Parallel)
+[![Build Status](https://travis-ci.org/NAntCrossCompile/NAnt.DependencyToFileset.svg?branch=master)](https://travis-ci.org/NAntCrossCompile/NAnt.DependencyToFileset)
 
 ## Remarks
 * Access to the loop property is only available in the &lt;do&gt; block of the task and will only work in XML attributes.
