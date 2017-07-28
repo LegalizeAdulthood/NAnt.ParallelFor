@@ -23,7 +23,7 @@ Have a look at the [Wiki](/../../wiki) for a detailed task description.
 ## Examples
 ### Looping over files
 ```xml
-<paralellfor item="File" property="file">
+<parallelfor item="File" property="file">
   <in>
     <items>
       <include name="**/*.c"/>
@@ -37,12 +37,12 @@ Have a look at the [Wiki](/../../wiki) for a detailed task description.
       <arg value="${file}"/>
     </exec>
   </do>
-</paralellfor>
+</parallelfor>
 ```
 
 ### Looping over directories
 ```xml
-<paralellfor item="Folder" property="directory">
+<parallelfor item="Folder" property="directory">
   <in>
     <items>
       <include name="*"/>
@@ -56,12 +56,12 @@ Have a look at the [Wiki](/../../wiki) for a detailed task description.
       <arg value="@{directory}"/>
     </exec>
   </do>
-</paralellfor>
+</parallelfor>
 ```
 
 ### Looping over string items
 ```xml
-<paralellfor item="String" property="stringItem" delim=";" in="Item1;Item2;Item3;Item4">
+<parallelfor item="String" property="stringItem" delim=";" in="Item1;Item2;Item3;Item4">
   <do maxthreads="8" orderby="Name">      
     <echo message="String Item: ${stringItem}"/>
     <exec program="cmd.exe">
@@ -70,12 +70,12 @@ Have a look at the [Wiki](/../../wiki) for a detailed task description.
       <arg value="${stringItem}"/>
     </exec>
   </do>
-</paralellfor>
+</parallelfor>
 ```
 
 ### Looping over lines of a file
 ```xml
-<paralellfor item="Line" property="lineContent" in="SampleFile.txt">
+<parallelfor item="Line" property="lineContent" in="SampleFile.txt">
   <do maxthreads="8" orderby="Name">      
     <echo message="Line: ${lineContent}"/>
     <exec program="cmd.exe">
@@ -84,5 +84,5 @@ Have a look at the [Wiki](/../../wiki) for a detailed task description.
       <arg value="${lineContent}"/>
     </exec>
   </do>
-</paralellfor>
+</parallelfor>
 ```
